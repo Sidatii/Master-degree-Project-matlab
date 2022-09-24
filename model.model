@@ -95,9 +95,9 @@ L_S = (1-e1)*L_S{+1} + e1*(L_S{-1} + 2/4*(D4L_CORE_INF_TAR - ss_DLA_CPI_RW + DLA
 % === Definitions ===
 RR = RS - D4L_CORE_INF{+1};
 L_Z = L_S + L_CPI_RW - CORE_INF;
-DLA_CPI_CORE =  a1*DLA_CPI_CORE{-1} + (1-a1)*DLA_CPI_CORE{+1} + a2*RMC + SHK_DLA_CPI_CORE;
+DLA_CORE_INF =  a1*DLA_CORE_INF{-1} + (1-a1)*DLA_CORE_INF{+1} + a2*RMC + SHK_DLA_CORE_INF;
 RMC = a3*L_GDP_GAP + (1-a3)*L_Z_GAP;
-E_DLA_CPI_CORE = DLA_CPI_CORE{+1};
+E_DLA_CORE_INF = DLA_CORE_INF{+1};
 DLA_Z       = 4*(L_Z - L_Z{-1});
 L_GDP_GAP = L_GDP - L_GDP_BAR;
 RR_GAP    = RR - RR_BAR;
