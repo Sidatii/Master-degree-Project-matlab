@@ -7,11 +7,6 @@ function [m,p,mss] = readmodel()
 p.ss_DLA_GDP_BAR = 3.3874; 
 
 % Domestic inflation target
-p.ss_D4L_CORE_INF_TAR = 1.5; 
-
-% Domestic real interest rate 
-p.ss_RR_BAR = 1.3729; 
-
 % Change in the real ER (negative number = real appreciation)
 p.ss_DLA_Z_BAR = 0.07; 
 
@@ -74,16 +69,7 @@ p.e1 = 0.4; % setting e1 equal to 0 reduces the equation to the simple UIP
 
 % persistence of inflation target adjustment to the medium-term target (higher values mean slower adjustment)
 % D4L_CPI_TAR = rho_D4L_CPI_TAR*D4L_CPI_TAR{-1} + (1-rho_D4L_CPI_TAR)*ss_D4L_CPI_TAR + SHK_D4L_CPI_TAR;
-p.rho_D4L_CORE_INF_TAR = 0.5; 
-
-% persistence in convergence of trend variables to their steady-state levels
-% applies for:   DLA_GDP_BAR, DLA_Z_BAR, RR_BAR and RR_RW_BAR
-% example:
-% DLA_Z_BAR = rho_DLA_Z_BAR*DLA_Z_BAR{-1} + (1-rho_DLA_Z_BAR)*ss_DLA_Z_BAR + SHK_DLA_Z_BAR;
 p.rho_DLA_Z_BAR   = 0.8;
-p.rho_DLA_GDP_BAR = 0.8;
-p.rho_RR_BAR      = 0.8;
-p.rho_RR_RW_BAR   = 0.8;
 
 % persistence in foreign output gap 
 % L_GDP_RW_GAP = rho_L_GDP_RW_GAP*L_GDP_RW_GAP{-1} + SHK_L_GDP_RW_GAP;
@@ -103,24 +89,11 @@ m = model('C:\Users\hp\Desktop\QPM Model\model.model','linear=',true,'assign',p)
 % 2) command 'solve' takes the model object 'm' and solves the model
 % for its reduced form (Blanchard-Kahn algorithm). The reduced form is again written in the object 'm'   
 m = solve(m);
-
 % 3) command 'sstate' further takes the model object 'm', calculates the model's
-% steady-state and writes everything back in the object 'm'. 
-m = sstate(m);
-
 
 %% === Information which can be extracted from the model object === 
 % a) extract steady-state values
-mss = get(m,'sstate');
-
-% b) extract comments on all variables and parameters
-descrep = get(m,'desc');
-
-% c) extract list of variables'/parameters' names
 ynames = get(m,'yList'); %- measuments variables
-xnames = get(m,'xList'); %- transition variables
-enames = get(m,'eList'); %- shocks
-enames = get(m,'pList'); %- parameters
 
 % d) extract list of equations
 yeqtn = get(m,'yEqtn'); %- measuments equations

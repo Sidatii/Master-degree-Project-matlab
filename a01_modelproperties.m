@@ -32,11 +32,7 @@ end
 % Fill the respective databases with the shock values for the starting
 % point of the simulation (startsim). For simplicity, all shocks are set to
 % 1 percent
-d.SHK_DLA_CORE_INF.SHK_DLA_CORE_INF(startsim) = 1;
 d.SHK_L_GDP_GAP.SHK_L_GDP_GAP(startsim) = 1;
-d.SHK_L_S.SHK_L_S(startsim) = 1;
-d.SHK_RS.SHK_RS(startsim) = 1; % This shock (monetary policy) is added in the video
-
 %% Simulate IRFs
 % Simulate the model's response to a given shock using the command 'simulate'.
 % The inputs are model 'm' and the respective database 'd.{shock_name}'.

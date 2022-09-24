@@ -40,9 +40,6 @@ d = dbbatch(d,'D4L_$1','diff(d.$0,-4)','namefilter','L_(.*)','fresh',false);
 % Domestic real interest rate
 d.RR = d.RS - d.D4L_CORE_INF;
 
-% Foreign real interest rate
-d.RR_RW = d.RS_RW - d.D4L_CPI_RW;
-
 %% Trends and Gaps - Hodrick-Prescott filter
 list = {'RR','L_Z','RR_RW'};
 for i = 1:length(list)
@@ -90,7 +87,9 @@ x.figure('Nominal Variables','subplot',[2,3],'style',sty,'range',rng,...
   'legendLocation','SouthOutside');
 
 x.graph('Core Inflation (%)','legend',true);
+
 x.series('',[d.D4L_CORE_INF d.D4L_CORE_INF],'legendEntry=',{'q-o-q','y-o-y'});
+
 
 x.graph('Foreign Inflation (%)','legend',true);
 x.series('',[d.DLA_CPI_RW d.D4L_CPI_RW],'legendEntry=',{'q-o-q','y-o-y'});

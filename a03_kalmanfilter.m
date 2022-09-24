@@ -42,22 +42,13 @@ edate = qq(2021,4);
 %% Load data
 d = dbload('results/history.csv');
 
-dd.OBS_CORE_INF   = d.CORE_INF;
-
-dd.OBS_L_GDP        = d.L_GDP;
-dd.OBS_L_S          = d.L_S;
-dd.OBS_RS           = d.RS;
 
 dd.OBS_RS_RW        = d.RS_RW;
 
 dd.OBS_DLA_CPI_RW   = d.DLA_CPI_RW;
 dd.OBS_L_GDP_RW_GAP = d.L_GDP_RW_GAP;
 dd.OBS_D4L_CORE_INF_TAR  = d.D4L_CORE_INF_TAR;
-
 %% Filtration
-% Input arguments:
-%   m - solved model object
-%   dd - database with observations for measurement variables
 %   sdate:edate - date range to tun the filter
 % Some output arguments:
 %   m_kf - model object
@@ -115,11 +106,6 @@ x.pagebreak();
 x.figure('Gaps','subplot',[3,3],'style',sty,'range',rng,'dateformat','YY:P');
 
 x.graph('Core Inflation','legend',false);
-x.series('',[d.DLA_CORE_INF d.D4L_CORE_INF_TAR]);
-
-x.graph('Marginal Cost','legend',false);
-x.series('',[d.RMC]);
-
 x.graph('GDP GAP','legend',false);
 x.series('',[d.L_GDP_GAP]);
 
@@ -183,27 +169,16 @@ x.series('',[d.DLA_S d.D4L_S], 'legendEntry=',{'qoq','yoy'});
 
 x.graph('Inflation differential','legend',true);
 x.series('',[d.DLA_CORE_INF d.DLA_CPI_RW], 'legendEntry=', {'domestic Core inflation','foreign inflation'});
-
-x.graph('Interest rate differential','legend',true);
-x.series('',[d.RS d.RS_RW], 'legendEntry=', {'domestic IR','foreign IR'});
-
 x.graph('Exchange rate shock','legend',false);
 x.series('',[d.SHK_L_S]);
 
 x.figure('Core Inflation','subplot',[3,1],'style',sty,'range',rng,'dateformat','YY:P');
 
 x.graph('Core Inflation qoq, percent','legend',true);
-x.series('',[d.DLA_CORE_INF d.DLA_CORE_INF-d.SHK_DLA_CORE_INF], 'legendEntry=', {'Actual','Predicted'});
 
 x.graph('Core Inflation and RMC, percent','legend',true);
 x.series('',[d.DLA_CORE_INF-d.D4L_CORE_INF_TAR d.RMC],'legendEntry=', {'Core Inflation (deviation from the target)','RMC'});
 
-x.graph('Marginal cost decomposition, pp','legend',true);
-x.series('',[d.a3*d.L_GDP_GAP (1-d.a3)*d.L_Z_GAP],'legendEntry=',{'Output gap','RER gap'},'plotfunc',@barcon);
-x.series('',d.RMC,'legendEntry=',{'RMC'});
-
-x.figure('','style',sty,'range',rng,'dateformat','YY:P');
-x.graph('Core Inflation decomposition, qoq percent','legend',true);
 x.series('',[d.a1*d.DLA_CORE_INF{-1} (1-d.a1)*d.E_DLA_CORE_INF d.a2*d.a3*d.L_GDP_GAP d.a2*(1-d.a3)*d.L_Z_GAP d.SHK_DLA_CORE_INF],...
   'legendEntry=',{'Persistency','Expectations','Output Gap','RER Gap','Shock'},'plotfunc',@barcon);
 x.series('',d.DLA_CORE_INF,'legendEntry=',{'Inflation'});

@@ -19,10 +19,5 @@ etime = qq(2021,4); %the end of the known history
        
 %% Selection of model variables to include in the report:
 
-list_xnames = {'DLA_CORE_INF','D4L_CORE_INF','L_GDP_GAP','D4L_GDP','L_S'}; 
-
-%% Calling function (stored in "utils" folder) which generates the in-sample simulations and reports the results
-in_sample_report(stime,etime,list_xnames)
-
 % remove folder "utils" from matlab path
 rmpath utils
